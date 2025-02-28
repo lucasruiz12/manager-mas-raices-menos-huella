@@ -1,0 +1,99 @@
+.full-container{
+    background-color: #e3e3e3;
+    height: 100vh;
+    width: 100vw;
+}
+
+.head-decoration{
+    background-color: rgb(20, 115, 44);
+    width: 100%;
+    height: 25%;
+}
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    margin-top: -10vh;
+}
+
+.form-search{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* min-height: 50vh; */
+    max-height: 60vh;
+    width: 50vw;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 1rem;
+    gap: 2vh;
+}
+
+.form-date-control{
+    border: none;
+    padding: 0.1rem 0.5rem;
+    width: 100%;
+}
+
+.list-group-item {
+    cursor: pointer;
+    pointer-events: auto;
+}
+.list-group-item:hover {
+    background-color: #b6b6b6 ;
+}
+
+.clients-filter {
+    max-height: 15vh;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+@media (max-width: 986px){
+    .form-search{
+        width: 70vw;
+    }
+}
+
+.menu-desp {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    width: 47vw; /* Ajusta al ancho del input */
+    max-height: 200px; /* Opcional: controla la altura máxima */
+    overflow-y: scroll; /* Permite desplazarse si hay muchas opciones */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block; /* Asegúrate de que sea visible */
+}
+.menu-desp li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.menu-desp li:hover {
+    background-color: #f0f0f0;
+}
+
+.btn-download-csv{
+    width: 50% !important;
+}

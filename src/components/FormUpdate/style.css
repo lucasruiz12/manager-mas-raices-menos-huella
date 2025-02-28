@@ -1,0 +1,30 @@
+.container-update{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 50vh;
+    max-height: 60vh;
+    width: 50vw !important;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 1rem;
+    margin-top: -10vh;
+}
+
+.text-download{
+    width: 100%;
+    cursor: pointer;
+    text-decoration: none;
+    color: #007bff
+}
+
+.text-download:hover{
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+@media (max-width: 986px){
+    .container-update{
+        width: 70vw;
+    }
+}
