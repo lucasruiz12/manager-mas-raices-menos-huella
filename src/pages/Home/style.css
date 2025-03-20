@@ -7,7 +7,7 @@
 .head-decoration{
     background-color: rgb(20, 115, 44);
     width: 100%;
-    height: 25%;
+    height: 15%;
 }
 
 .form-container{
@@ -70,6 +70,7 @@
 @media (max-width: 986px){
     .form-search{
         width: 70vw;
+        max-height: 100%;
     }
 }
 
@@ -79,7 +80,7 @@
     border: 1px solid #ccc;
     z-index: 1000; /* Asegura que esté por encima de otros elementos */
     width: 47vw; /* Ajusta al ancho del input */
-    max-height: 200px; /* Opcional: controla la altura máxima */
+    max-height: 150px; /* Opcional: controla la altura máxima */
     overflow-y: scroll; /* Permite desplazarse si hay muchas opciones */
     list-style: none;
     padding: 0;
@@ -96,4 +97,10 @@
 
 .btn-download-csv{
     width: 50% !important;
+}
+
+@media (max-width: 786px){
+    .btn-download-csv{
+        width: 100% !important;
+    }
 }

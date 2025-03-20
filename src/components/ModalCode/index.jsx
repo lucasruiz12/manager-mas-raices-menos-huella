@@ -29,15 +29,15 @@ const ModalCode = ({ modal, onHide, submitData }) => {
             centered
         >
             <Modal.Header closeButton>
-                <Modal.Title>Confirmación Requerida</Modal.Title>
+                <Modal.Title>Confirmación requerida</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>Ingrese su código de operador para confirmar la acción:</p>
+                <p>Ingrese su código de administrador para confirmar la acción:</p>
                 <Form.Control
                     type="password"
                     value={operatorCode}
                     onChange={(e) => setOperatorCode(e.target.value)}
-                    placeholder="Código de operador"
+                    placeholder="Código de administrador"
                 />
                 {error && <p className="text-danger mt-2">{error}</p>}
             </Modal.Body>
@@ -45,7 +45,7 @@ const ModalCode = ({ modal, onHide, submitData }) => {
                 <Button variant="secondary" onClick={onHide}>
                     Cancelar
                 </Button>
-                <Button variant="primary" onClick={handleConfirm}>
+                <Button variant="success" onClick={handleConfirm}>
                     Confirmar
                 </Button>
             </Modal.Footer>

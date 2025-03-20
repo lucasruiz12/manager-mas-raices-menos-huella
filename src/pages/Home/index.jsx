@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import Spinner from 'react-bootstrap/Spinner';
-import connections from '../../connections';
+// import connections from '../../connections';
 import DatePicker from 'react-datepicker';
 import Navbar from '../../components/Navbar';
-import FormUpdate from '../../components/FormUpdate';
+import NewSeed from '../../components/NewSeed';
 import ModalCode from '../../components/ModalCode';
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-toastify/dist/ReactToastify.css';
@@ -36,9 +36,6 @@ const Home = () => {
             });
         };
 
-
-
-
         // setInputValue(value);
         // setFilteredClients(
         //     clients.filter(client =>
@@ -49,7 +46,7 @@ const Home = () => {
     };
 
     const handleCreationClick = () => {
-        // console.log("VAMOS A DESPACHAR", newNotification);
+        console.log("VAMOS A DESPACHAR", newNotification);
         setCreationInProgress(true);
 
         setTimeout(() => {
@@ -59,6 +56,7 @@ const Home = () => {
                 timestamp: "",
             });
             setCreationInProgress(false);
+            toast.success("Push notification creada exitosamente", { autoClose: 2000 });
         }, 1500);
     };
 
@@ -169,7 +167,7 @@ const Home = () => {
                         <ToastContainer />
                     </div>
                     :
-                    <FormUpdate showModal={showModal} setShowModal={setShowModal} />
+                    <NewSeed showModal={showModal} setShowModal={setShowModal} />
             }
         </div>
     );

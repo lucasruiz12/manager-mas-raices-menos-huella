@@ -44,15 +44,32 @@ const Login = () => {
             const { data } = await connections.loginUser(userData);
             if (data.success && data.user) {
                 const { token } = data;
-                const { email, name, id } = data.user
-                const isAuthenticated = { email, name, id };
-                localStorage.setItem(IS_AUTHENTICATED, JSON.stringify(isAuthenticated));
-                localStorage.setItem(ACCESS_TOKEN, token);
-
-                setTimeout(() => {
-                    setLoading(false);
-                    window.location.href = "/home"
-                }, 2000);
+                const { email, name, id, admin } = data.user
+                const isAuthenticated = { email, name, id, admin };
+                if (admin) {
+                    localStorage.setItem(IS_AUTHENTICATED, JSON.stringify(isAuthenticated));
+                    localStorage.setItem(ACCESS_TOKEN, token);
+    
+                    setTimeout(() => {
+                        setLoading(false);
+                        window.location.href = "/home"
+                    }, 1500);
+                } else {
+                    setTimeout(() => {
+                        toast.error('Error!', {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: false,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                            transition: Bounce,
+                        });
+                        setLoading(false);
+                    }, 2000);
+                }
 
             } else {
                 setTimeout(() => {

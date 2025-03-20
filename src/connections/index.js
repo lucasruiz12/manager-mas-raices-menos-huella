@@ -14,6 +14,9 @@ export default {
     getUsers: () => {
         return axiosToken.get(`${URL_BASE}/api/users`);
     },
+    createSeed: (data) => {
+        return axiosToken.post(`${URL_BASE}/api/seeds/create`, data);
+    },
     // createSeed: (data) => {
     //     return axios.post(`${URL_BASE}/api/seeds/create`, data);
     // },

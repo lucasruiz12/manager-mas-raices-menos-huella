@@ -16,10 +16,10 @@ const Navbar = ({ currentTab, setCurrentTab }) => {
                 <div id="navbarNav">
                     <ul className="navbar-nav py-2">
                         <li className="nav-item" style={{ cursor: "pointer" }} onClick={() => setCurrentTab(1)}>
-                            <p style={{ margin: 0 }} className={`nav-link${currentTab === 1 ? " active" : ""}`} aria-current="page">Agregar push notification</p>
+                            <p style={{ margin: 0 }} className={`nav-link${currentTab === 1 ? " active" : ""}`} aria-current="page">Nueva push notification</p>
                         </li>
                         <li className="nav-item" style={{ cursor: "pointer" }} onClick={() => setCurrentTab(2)}>
-                            <p style={{ margin: 0 }} className={`nav-link${currentTab === 2 ? " active" : ""}`}>Crear nueva raíz</p>
+                            <p style={{ margin: 0 }} className={`nav-link${currentTab === 2 ? " active" : ""}`}>Nueva raíz</p>
                         </li>
                     </ul>
                 </div>
