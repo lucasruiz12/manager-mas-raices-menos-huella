@@ -69,7 +69,7 @@ const Login = () => {
                         });
                         setLoading(false);
                     }, 2000);
-                }
+                };
 
             } else {
                 setTimeout(() => {
