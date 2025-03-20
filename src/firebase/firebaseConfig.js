@@ -27,7 +27,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const notificationsCollection = collection(db, "notifications")
+const notificationsCollection = collection(db, "notifications");
 
 // 🔹 Función para guardar una notificación en Firestore
 const saveNotification = async ({ title, body, timestamp }) => {

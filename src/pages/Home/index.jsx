@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
+import { IS_AUTHENTICATED } from '../../constants';
 import Spinner from 'react-bootstrap/Spinner';
 // import connections from '../../connections';
 import DatePicker from 'react-datepicker';
@@ -9,14 +10,15 @@ import ModalCode from '../../components/ModalCode';
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-toastify/dist/ReactToastify.css';
 import './style.css';
-import { IS_AUTHENTICATED } from '../../constants';
+import { db } from '../../firebase/firebaseConfig';
+import { addDoc, collection } from 'firebase/firestore';
 
 const Home = () => {
     const [newNotification, setNewNotification] = useState({
         title: "",
         body: "",
         timestamp: "",
-    })
+    });
 
     const [currentTab, setCurrentTab] = useState(1);
     const [showModal, setShowModal] = useState(false);
@@ -35,54 +37,42 @@ const Home = () => {
                 timestamp: e,
             });
         };
-
-        // setInputValue(value);
-        // setFilteredClients(
-        //     clients.filter(client =>
-        //         client.name.toLowerCase().includes(value.toLowerCase())
-        //     )
-        // );
-        // setShowDropdown(true);
     };
 
-    const handleCreationClick = () => {
-        console.log("VAMOS A DESPACHAR", newNotification);
-        setCreationInProgress(true);
+    const handleCreationClick = async () => {
 
-        setTimeout(() => {
-            setNewNotification({
-                title: "",
-                body: "",
-                timestamp: "",
-            });
-            setCreationInProgress(false);
-            toast.success("Push notification creada exitosamente", { autoClose: 2000 });
-        }, 1500);
+        const notificationsCollection = collection(db, "notifications")
+
+        try {
+            setCreationInProgress(true);
+            // saveNotification(newNotification)
+            const docRef = await addDoc(notificationsCollection, newNotification);
+            
+            setTimeout(() => {
+                setNewNotification({
+                    title: "",
+                    body: "",
+                    timestamp: "",
+                });
+                setCreationInProgress(false);
+                toast.success(`Push notification creada exitosamente (id: ${docRef.id})`, { autoClose: 2000 });
+            }, 1500);
+        } catch (err) {
+            setTimeout(() => {
+                setNewNotification({
+                    title: "",
+                    body: "",
+                    timestamp: "",
+                });
+                setCreationInProgress(false);
+                toast.error("Error al crear push notification", { autoClose: 2000 });
+            }, 1500);
+            console.error(err)
+        }
     };
-
-    // const handleError = (err) => {
-    //     setTimeout(() => {
-    //         setDataToSearch({ site: "", interval: 9 });
-    //         setInputValue("");
-    //         setDateToFilter("");
-    //         if (err?.status === 404) {
-    //             toast.warning("No hay datos disponibles", { autoClose: 2000 });
-    //             setCreationInProgress(false);
-    //         } else {
-    //             toast.error("¡Error! Reintente o comuníquese con soporte", { autoClose: 2000 });
-    //             setCreationInProgress(false);
-    //         }
-    //     }, 1000);
-    //     console.error(err);
-    // };
-
-    // const handleDateChange = (date) => {
-    //     setDateToFilter(date);
-    //     console.log(date);
-    // };
 
     useEffect(() => {
-        if (!JSON.parse(localStorage.getItem(IS_AUTHENTICATED))?.id) {
+        if (!JSON.parse(localStorage.getItem(IS_AUTHENTICATED))?.id && !JSON.parse(localStorage.getItem(IS_AUTHENTICATED))?.admin ) {
             window.location.href = "/"
         };
     }, []);
@@ -107,8 +97,6 @@ const Home = () => {
                                     onChange={handleInputChange}
                                     className="form-control"
                                     placeholder="Ingrese título"
-                                // onFocus={() => dataToSearch.interval !== 9 && setShowDropdown(true)}
-                                // disabled={dataToSearch.interval === 9}
                                 />
                                 <label htmlFor="body" className="form-label mt-4">Cuerpo de notificación</label>
                                 <input
@@ -119,8 +107,6 @@ const Home = () => {
                                     onChange={handleInputChange}
                                     className="form-control"
                                     placeholder="Ingrese cuerpo de mensaje"
-                                // onFocus={() => dataToSearch.interval !== 9 && setShowDropdown(true)}
-                                // disabled={dataToSearch.interval === 9}
                                 />
                                 <label htmlFor="specificDay" className="form-label mt-4">Día y hora</label>
                                 <div className="form-control">
@@ -130,7 +116,6 @@ const Home = () => {
                                         dateFormat="yyyy-MM-dd HH:mm"
                                         timeFormat="HH:mm"
                                         minDate={new Date()}
-                                        // maxTime={new Date().setHours(23, 30)}
                                         showTimeSelect
                                         className="form-date-control"
                                         placeholderText="Seleccione una fecha"
@@ -142,7 +127,6 @@ const Home = () => {
                                 <button
                                     type="button"
                                     className="btn btn-success btn-download-csv"
-                                    // onClick={() => setShowModal(true)}
                                     onClick={() => handleCreationClick()}
                                     disabled={(creationInProgress || !newNotification.timestamp || !newNotification.title || !newNotification.body)}
                                 >

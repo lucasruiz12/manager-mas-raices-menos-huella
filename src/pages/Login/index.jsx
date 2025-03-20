@@ -49,7 +49,7 @@ const Login = () => {
                 if (admin) {
                     localStorage.setItem(IS_AUTHENTICATED, JSON.stringify(isAuthenticated));
                     localStorage.setItem(ACCESS_TOKEN, token);
-    
+
                     setTimeout(() => {
                         setLoading(false);
                         window.location.href = "/home"
@@ -118,7 +118,8 @@ const Login = () => {
     }, []);
 
     return (
-        <div>
+        <div className="full-container">
+            <div className="head-decoration"></div>
             <ToastContainer
                 position="top-right"
                 autoClose={3000}
@@ -132,59 +133,63 @@ const Login = () => {
                 theme="colored"
                 transition={Bounce}
             />
-            <form className="form-login" onSubmit={submitData}>
-                <div className="container-input-form-login">
-                    <label className="input-title" htmlFor="user">
-                        Usuario:
-                    </label>
-                    <input
-                        className="input-form"
-                        type="text"
-                        id="user"
-                        name="user"
-                        onChange={changeData}
-                    />
-                </div>
-                <div className="container-input-form-login">
-                    <label className="input-title" htmlFor="password">
-                        Contraseña:
-                    </label>
-                    <input
-                        className="input-form"
-                        type="password"
-                        id="password"
-                        name="password"
-                        onChange={changeData}
-                    />
-                </div>
-                <div className="link-container">
-                    {
-                        loading ?
-                            <button className="btn-green-login">
-                                <Spinner
-                                    as="span"
-                                    animation="border"
-                                    size="sm"
-                                    role="status"
-                                    aria-hidden="true"
+            <div className="container p-4 form-container">
+                <form className="form-login" onSubmit={submitData}>
+                <h2 className="mb-4" style={{ display: "flex", justifyContent: "center" }}>Inicio de sesión</h2>
+                    <div className="mb-3 container-form-control-login">
+                        <label className="form-label" htmlFor="user">
+                            Usuario:
+                        </label>
+                        <input
+                            className="form-control"
+                            type="text"
+                            id="user"
+                            name="user"
+                            onChange={changeData}
+                        />
+                    </div>
+                    <div className="container-form-control-login">
+                        <label className="form-label" htmlFor="password">
+                            Contraseña:
+                        </label>
+                        <input
+                            className="form-control"
+                            type="password"
+                            id="password"
+                            name="password"
+                            onChange={changeData}
+                        />
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                        {
+                            loading ?
+                                <button className="btn btn-success btn-download-csv" disabled>
+                                    <Spinner
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                    />
+                                </button>
+                                :
+                                <input
+                                    type="submit"
+                                    value="INICIAR SESIÓN"
+                                    className={`btn btn-success btn-download-csv${(formData.user === "" ||
+                                        formData.password === "" ||
+                                        formData.password.length < 7) ? " disabled" : ""}`}
+                                    disabled={
+                                        formData.user === "" ||
+                                        formData.password === "" ||
+                                        formData.password.length < 7 || 
+                                        loading
+                                    }
                                 />
-                            </button>
-                            :
-                            <input
-                                type="submit"
-                                value="Iniciar sesión"
-                                className={`btn-green-login${(formData.user === "" ||
-                                    formData.password === "" ||
-                                    formData.password.length < 7) ? " disabled" : ""}`}
-                                disabled={
-                                    formData.user === "" ||
-                                    formData.password === "" ||
-                                    formData.password.length < 7
-                                }
-                            />
-                    }
-                </div>
-            </form>
+                        }
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
