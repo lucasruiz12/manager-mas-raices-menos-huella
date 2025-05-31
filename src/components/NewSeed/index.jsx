@@ -18,6 +18,7 @@ const NewSeed = () => {
         user_id: "",
         google_coordinates_lat: "",
         google_coordinates_lng: "",
+        address: "",
     });
 
     const handleInputChange = (e) => {
@@ -71,6 +72,7 @@ const NewSeed = () => {
                         user_id: "",
                         google_coordinates_lat: "",
                         google_coordinates_lng: "",
+                        address: "",
                     });
                     setFilteredClients(allClients);
                     setCreationInProgress(false);
@@ -156,6 +158,19 @@ const NewSeed = () => {
                         onFocus={() => setShowDropdown(false)}
                     />
                 </div>
+                <div className="mb-3">
+                    <label htmlFor="address" className="form-label">Colonia</label>
+                    <input
+                        type="text"
+                        id="address"
+                        name="address"
+                        value={dataToSearch.address}
+                        onChange={handleInputChange}
+                        className="form-control"
+                        placeholder="Ingrese colonia"
+                        onFocus={() => setShowDropdown(false)}
+                    />
+                </div>
 
                 <div style={{ display: "flex", alignItems: "center", flexDirection: "column", width: "100%" }}>
                     <button
@@ -167,6 +182,7 @@ const NewSeed = () => {
                             dataToSearch.user_id === "" ||
                             dataToSearch.google_coordinates_lat === "" ||
                             dataToSearch.google_coordinates_lng === "" ||
+                            dataToSearch.address === "" ||
                             creationInProgress
                         }
                     >
